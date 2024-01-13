@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\PageController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'Admin\PageController@index');
@@ -8,4 +9,5 @@ Route::get('/', 'Admin\PageController@index');
 Route::get('/admin/login', 'Admin\AuthController@showLogin');
 Route::post('/admin/login', 'Admin\AuthController@Login');
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin'], function () {
+    Route::get('/','PageController@dashboard');
 });
