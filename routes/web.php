@@ -10,5 +10,6 @@ Route::post('/admin/login', 'Admin\AuthController@Login');
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.', 'middleware' => 'RedirectIfNotAdmin'], function () {
     Route::get('/', 'PageController@dashboard');
     Route::resource('/programming', 'ProgrammingController');
+    Route::resource('/tag', 'TagController');
     Route::get('/logout', 'AuthController@logout');
 });
