@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\PageController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'PageController@index');
@@ -8,7 +7,8 @@ Route::get('/', 'PageController@index');
 //Admin Route
 Route::get('/admin/login', 'Admin\AuthController@showLogin');
 Route::post('/admin/login', 'Admin\AuthController@Login');
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin', 'middleware' => 'RedirectIfNotAdmin'], function () {
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.', 'middleware' => 'RedirectIfNotAdmin'], function () {
     Route::get('/', 'PageController@dashboard');
-    Route::get('/logout', 'PageController@logout');
+    Route::resource('/programming', 'ProgrammingController');
+    Route::get('/logout', 'AuthController@logout');
 });

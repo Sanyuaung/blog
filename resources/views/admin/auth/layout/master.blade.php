@@ -114,7 +114,13 @@
         <!-- Header -->
         <div class="header p-3">
             <div class="card p-2">
-                @yield('content') </div>
+                @if ($errors->any())
+                    @foreach ($errors->all() as $e)
+                        <div class="alert alert-danger">{{ $e }}</div>
+                    @endforeach
+                @endif
+                @yield('content')
+            </div>
         </div>
 
     </div>

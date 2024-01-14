@@ -12,6 +12,7 @@ class AuthController extends Controller
     {
         return view('admin.auth.login');
     }
+
     public function Login(Request $request)
     {
         $cre = request()->only('email', 'password');
@@ -21,5 +22,11 @@ class AuthController extends Controller
         } else {
             return redirect('/admin')->with('success', 'Welcome ' . auth()->guard('admin')->name);
         }
+    }
+
+    public function logout()
+    {
+        auth()->guard('admin')->logout();
+        return redirect('/');
     }
 }
