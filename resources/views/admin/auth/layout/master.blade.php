@@ -18,6 +18,8 @@
     <!-- Page plugins -->
     <!-- Argon CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/argon.css?v=1.2.0') }}" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    @yield('css')
 </head>
 
 <body>
@@ -98,7 +100,7 @@
                                 </div>
 
                                 <div class="dropdown-divider"></div>
-                                <a href="#!" class="dropdown-item">
+                                <a href="{{ url('/admin/logout') }}" class="dropdown-item">
                                     <i class="ni ni-user-run"></i>
                                     <span>Logout</span>
                                 </a>
@@ -128,6 +130,19 @@
     <script src="{{ asset('assets/vendor/chart.js/dist/Chart.extension.js') }}"></script>
     <!-- Argon JS -->
     <script src="{{ asset('assets/js/argon.js?v=1.2.0') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
+    @yield('script')
+    <script>
+        @if (session()->has('error'))
+            toastr.error('{{ session('error') }}')
+        @endif
+    </script>
+    <script>
+        @if (session()->has('success'))
+            toastr.success('{{ session('success') }}')
+        @endif
+    </script>
 </body>
 
 </html>
