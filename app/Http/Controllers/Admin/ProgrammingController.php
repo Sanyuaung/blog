@@ -14,7 +14,8 @@ class ProgrammingController extends Controller
      */
     public function index()
     {
-        //
+        $data = Programming::orderBy('id', 'desc')->paginate(5);
+        return view('admin.programming.index', compact('data'));
     }
 
     /**
@@ -37,7 +38,7 @@ class ProgrammingController extends Controller
             'slug' => Str::slug($request->name),
             'name' => $request->name,
         ]);
-        return redirect()->back()->with('success', 'Created');
+        return redirect('/admin/programming')->with('success', 'Created');
     }
 
     /**
@@ -69,6 +70,7 @@ class ProgrammingController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Programming::where('id', $id)->delete();
+        return redirect()->back()->with('success', 'Deleted');
     }
 }
