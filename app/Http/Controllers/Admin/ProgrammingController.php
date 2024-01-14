@@ -54,7 +54,8 @@ class ProgrammingController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = Programming::where('id', $id)->first();
+        return view('admin.programming.edit', compact('data'));
     }
 
     /**
@@ -62,7 +63,11 @@ class ProgrammingController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        Programming::where('id', $id)->update([
+            'slug' => Str::slug($request->name),
+            'name' => $request->name,
+        ]);
+        return redirect('/admin/programming')->with('success', 'Updated');
     }
 
     /**
