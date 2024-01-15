@@ -7,6 +7,7 @@ use App\Models\Article;
 use App\Models\Programming;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class ArticleController extends Controller
@@ -16,7 +17,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $data = Article::orderBy('id', 'desc')->paginate(5);
+        $data = Article::orderBy('id', 'desc')->with('tag', 'programming')->paginate(5);
         return view('admin.article.index', compact('data'));
     }
 
@@ -36,12 +37,35 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => "required"
-        ], ['name.required' => 'Article အမည် ထည့်ပေးပါ။']);
-        Article::create([
+            'tag' => "required",
+            'programming' => "required",
+            'name' => "required",
+            'image' => "required|max:2048",
+            'description' => "required",
+        ], [
+            'tag.required' => 'Tag ရွေးပေးပါ။',
+            'programming.required' => 'Programming ရွေးပေးပါ။',
+            'name.required' => 'ခေါင်းစဉ် ထည့်ပေးပါ။',
+            'image.required' => 'Image ထည့်ပေးပါ။',
+            'description.required' => 'Description ထည့်ပေးပါ။',
+        ]);
+        //image upload
+        $file = $request->file('image');
+        $file_name = uniqid() . $file->getClientOriginalName();
+        $file->move(public_path('/images'), $file_name);
+        //article store
+        $createdArticle = Article::create([
             'slug' => Str::slug($request->name),
             'name' => $request->name,
+            'image' => $file_name,
+            'description' => $request->description,
+            'view_count' => 0,
+            'like_count' => 0,
         ]);
+        //tag & programming sync
+        $article = Article::find($createdArticle->id);
+        $article->tag()->sync($request->tag);
+        $article->programming()->sync($request->programming);
         return redirect('/admin/article')->with('success', 'Created');
     }
 
@@ -79,7 +103,14 @@ class ArticleController extends Controller
      */
     public function destroy(string $id)
     {
-        Article::where('id', $id)->delete();
+        $data = Article::find($id);
+        //image delete
+        File::delete(public_path('/images/' . $data->image));
+        //tag & programming remove
+        $data->tag()->sync([]);
+        $data->programming()->sync([]);
+        //article delete
+        $data->delete();
         return redirect()->back()->with('success', 'Deleted');
     }
 }

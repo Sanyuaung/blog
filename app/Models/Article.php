@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'image', 'description', 'like_count', 'view_count'];
+    protected $fillable = ['slug', 'name', 'image', 'description', 'like_count', 'view_count'];
     public function comment()
     {
         return $this->hasMany(ArticleComment::class);
@@ -19,6 +19,6 @@ class Article extends Model
     }
     public function programming()
     {
-        return $this->hasMany(Programming::class, 'article_programming');
+        return $this->belongsToMany(Programming::class, 'article_programming');
     }
 }

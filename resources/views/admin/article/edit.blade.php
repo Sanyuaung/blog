@@ -1,10 +1,10 @@
 @extends('admin.auth.layout.master')
 @section('content')
     <div>
-        <a href="{{ route('admin.tag.index') }}" class="btn btn-primary">All Tags</a>
+        <a href="{{ route('admin.article.index') }}" class="btn btn-primary">All Tags</a>
     </div>
     <hr>
-    <form action="{{ route('admin.tag.update', $data->id) }}" method="POST">
+    <form action="{{ route('admin.article.update', $data->id) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="form-group">
