@@ -7,7 +7,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Name</th>
+                <th>Title</th>
                 <th>Like Count</th>
                 <th>View Count</th>
                 <th>Option</th>

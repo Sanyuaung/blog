@@ -83,7 +83,9 @@ class ArticleController extends Controller
     public function edit(string $id)
     {
         $data = Article::where('id', $id)->first();
-        return view('admin.article.edit', compact('data'));
+        $tag = Tag::all();
+        $programming = Programming::all();
+        return view('admin.article.edit', compact('data', 'tag', 'programming'));
     }
 
     /**
@@ -91,10 +93,28 @@ class ArticleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        Article::where('id', $id)->update([
+        $data = Article::find($id);
+        //image
+        $file = $request->file('image');
+        if ($file) {
+            //image delete
+            File::delete(public_path('/images/' . $data->image));
+            //image upload
+            $file_name = uniqid() . $file->getClientOriginalName();
+            $file->move(public_path('/images'), $file_name);
+        } else {
+            $file_name = $data->image;
+        }
+        //article update
+        $data->update([
             'slug' => Str::slug($request->name),
             'name' => $request->name,
+            'image' => $file_name,
+            'description' => $request->description,
         ]);
+        // tag & programming sync
+        $data->tag()->sync($request->tag);
+        $data->programming()->sync($request->programming);
         return redirect('/admin/article')->with('success', 'Updated');
     }
 

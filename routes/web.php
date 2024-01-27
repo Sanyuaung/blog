@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'PageController@index');
 
+//auth route
+Route::get('/login', 'AuthController@showLogin');
+Route::get('/register', 'AuthController@showRegister');
+
 //Admin Route
 Route::get('/admin/login', 'Admin\AuthController@showLogin');
 Route::post('/admin/login', 'Admin\AuthController@Login');
