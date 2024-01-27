@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/css/boxicons.min.css">
     <!-- custom style -->
     <link rel="stylesheet" href="{{ asset('/asset/style/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 
 <body>
@@ -129,6 +130,18 @@
             </div>
         </div>
     </div>
+    <script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        @if (session()->has('error'))
+            toastr.error('{{ session('error') }}')
+        @endif
+    </script>
+    <script>
+        @if (session()->has('success'))
+            toastr.success('{{ session('success') }}')
+        @endif
+    </script>
 </body>
 
 </html>

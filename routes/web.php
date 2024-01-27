@@ -6,7 +6,9 @@ Route::get('/', 'PageController@index');
 
 //auth route
 Route::get('/login', 'AuthController@showLogin');
+Route::post('/login', 'AuthController@Login');
 Route::get('/register', 'AuthController@showRegister');
+Route::post('/register', 'AuthController@Register');
 
 //Admin Route
 Route::get('/admin/login', 'Admin\AuthController@showLogin');
