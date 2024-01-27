@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Programming;
+use App\Models\Tag;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,5 +24,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrap();
+        View::share('tag',Tag::all());
+        View::share('programming',Programming::all());
     }
 }

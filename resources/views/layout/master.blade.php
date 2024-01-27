@@ -31,32 +31,26 @@
 
             <div class="col-4">
                 <div class="bg-card p-3">
-                    <a href="{{ url('/login') }}" class="btn btn-primary">Login</a>
-                    <a href="{{ url('/register') }}" class="btn btn-primary">Register</a>
+                    @guest
+                        <a href="{{ url('/login') }}" class="btn btn-primary">Login</a>
+                        <a href="{{ url('/register') }}" class="btn btn-primary">Register</a>
+                    @endguest
+                    @auth
+                        <a href="{{ url('/profile') }}" class="btn btn-primary">Profile</a>
+                        <a href="{{ url('/logout') }}" class="btn btn-primary">Logout</a>
+                    @endauth
                 </div>
                 <div class="bg-card p-3 mt-4">
                     <h5 class="text-primary">Tags</h5>
-                    <span class="btn btn-sm btn-dark mt-1">နည်းလမ်းများ </span>
-                    <span class="btn btn-sm btn-dark mt-1">Tutorial </span>
-                    <span class="btn btn-sm btn-dark mt-1">Tips </span>
-                    <span class="btn btn-sm btn-dark mt-1">Summernote </span>
-                    <span class="btn btn-sm btn-dark mt-1">Tricks </span>
-                    <span class="btn btn-sm btn-dark mt-1">web dev </span>
-                    <span class="btn btn-sm btn-dark mt-1">web design </span>
-                    <span class="btn btn-sm btn-dark mt-1">blogs </span>
-                    <span class="btn btn-sm btn-dark mt-1">articles </span>
+                    @foreach ($tag as $t)
+                        <a class="btn btn-sm btn-dark mt-1 text-white">{{ $t->name }} </a>
+                    @endforeach
                 </div>
                 <div class="bg-card p-3 mt-4">
                     <h5 class="text-primary">Programming</h5>
-                    <span class="btn btn-sm btn-dark mt-1">PHP </span>
-                    <span class="btn btn-sm btn-dark mt-1">Laravel </span>
-                    <span class="btn btn-sm btn-dark mt-1">React JS </span>
-                    <span class="btn btn-sm btn-dark mt-1">VueJS </span>
-                    <span class="btn btn-sm btn-dark mt-1">Jquery </span>
-                    <span class="btn btn-sm btn-dark mt-1">Bootstrap </span>
-                    <span class="btn btn-sm btn-dark mt-1">web design </span>
-                    <span class="btn btn-sm btn-dark mt-1">blogs </span>
-                    <span class="btn btn-sm btn-dark mt-1">articles </span>
+                    @foreach ($programming as $p)
+                        <a class="btn btn-sm btn-dark mt-1 text-white">{{ $p->name }} </a>
+                    @endforeach
                 </div>
 
                 <div class="bg-card p-3 mt-4">

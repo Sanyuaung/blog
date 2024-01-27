@@ -43,4 +43,9 @@ class AuthController extends Controller
         auth()->login($createdUser);
         return redirect('/')->with('success', 'Welcome ' . auth()->user()->name);
     }
+    public function Logout()
+    {
+        auth()->logout();
+        return redirect('/login');
+    }
 }
