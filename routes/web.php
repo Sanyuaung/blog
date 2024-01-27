@@ -9,7 +9,11 @@ Route::get('/login', 'AuthController@showLogin');
 Route::post('/login', 'AuthController@Login');
 Route::get('/register', 'AuthController@showRegister');
 Route::post('/register', 'AuthController@Register');
-Route::get('/logout', 'AuthController@Logout');
+Route::get('/article', 'ArticleController@all');
+Route::post('/article', 'ArticleController@detail');
+Route::group(['middleware' => 'RedirectIfNotAuth'], function () {
+    Route::get('/logout', 'AuthController@Logout');
+});
 
 //Admin Route
 Route::get('/admin/login', 'Admin\AuthController@showLogin');

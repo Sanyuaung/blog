@@ -39,17 +39,21 @@
                         <a href="{{ url('/profile') }}" class="btn btn-primary">Profile</a>
                         <a href="{{ url('/logout') }}" class="btn btn-primary">Logout</a>
                     @endauth
+                    <a href="{{ url('/article') }}" class="btn btn-primary">All</a>
+
                 </div>
                 <div class="bg-card p-3 mt-4">
                     <h5 class="text-primary">Tags</h5>
                     @foreach ($tag as $t)
-                        <a class="btn btn-sm btn-dark mt-1 text-white">{{ $t->name }} </a>
+                        <a href="{{ url('/article?tag=' . $t->slug) }}"
+                            class="btn btn-sm btn-dark mt-1 text-white">{{ $t->name }} </a>
                     @endforeach
                 </div>
                 <div class="bg-card p-3 mt-4">
                     <h5 class="text-primary">Programming</h5>
                     @foreach ($programming as $p)
-                        <a class="btn btn-sm btn-dark mt-1 text-white">{{ $p->name }} </a>
+                        <a href="{{ url('/article?programming=' . $p->slug) }}"
+                            class="btn btn-sm btn-dark mt-1 text-white">{{ $p->name }} </a>
                     @endforeach
                 </div>
 
