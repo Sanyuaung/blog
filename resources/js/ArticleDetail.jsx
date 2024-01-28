@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { createRoot } from "react-dom";
-const $data = bladeArticleDetail;
+import BtnLoader from "./Components/BtnLoader";
+const data = bladeArticleDetail;
+const isAuth = bladeIsAuth;
 const App = () => {
+    const [comments, setComments] = useState(data.comment);
+    const [comment, setComment] = useState("");
+    const addComment = () => {
+        alert("hello");
+    };
     return (
         <>
             <div>
-                <img src={$data.image_url} alt="" className="w-100 rounded" />
+                <img src={data.image_url} alt="" className="w-100 rounded" />
                 <div>
-                    <h3 className="mt-3 text-white">{$data.name}</h3>
+                    <h3 className="mt-3 text-white">{data.name}</h3>
                 </div>
                 <div className="mt-3">
-                    {$data.tag.map((t) => (
+                    {data.tag.map((t) => (
                         <span
                             key={t.id}
                             className="btn btn-dark btn-sm text-white"
@@ -18,7 +25,7 @@ const App = () => {
                             {t.name}
                         </span>
                     ))}
-                    {$data.programming.map((p) => (
+                    {data.programming.map((p) => (
                         <span
                             key={p.id}
                             className="btn btn-primary btn-sm text-white"
@@ -29,21 +36,40 @@ const App = () => {
                     |<button className="btn btn-sm btn-success">Like</button>
                     <button className="btn btn-sm btn-warning">Save</button>
                 </div>
-                <div className="card card-body bg-card mt-3">Desc </div>
+                <div
+                    className="card card-body bg-card mt-3"
+                    dangerouslySetInnerHTML={{ __html: data.description }}
+                ></div>
                 <div className="card card-body bg-card mt-3">
                     <h4 className="text-white">Comment List</h4>
-                    <textarea
-                        name="comment"
-                        id=""
-                        cols="30"
-                        rows="10"
-                        className="form-control"
-                    ></textarea>
-                    <div className="mt-3">
-                        <button className="btn btn-primary">Comment</button>
-                    </div>
+                    {isAuth && (
+                        <>
+                            <textarea
+                                onChange={(e) => setComment(e.target.value)}
+                                name="comment"
+                                id=""
+                                cols="30"
+                                rows="10"
+                                className="form-control"
+                            ></textarea>
+                            <div className="mt-3">
+                                <button
+                                    onClick={addComment}
+                                    className="btn btn-primary"
+                                >
+                                    Comment
+                                    <BtnLoader />
+                                </button>
+                            </div>
+                        </>
+                    )}
+                    {!isAuth && (
+                        <div className="alert alert-warning">
+                            Please Login First.
+                        </div>
+                    )}
                 </div>
-                {$data.comment.map((c) => (
+                {comments.map((c) => (
                     <div key={c.id} className="card card-body bg-card mt-3">
                         <div>
                             <b className="text-white">{c.user.name}</b>
