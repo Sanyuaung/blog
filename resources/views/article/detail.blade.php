@@ -1,3 +1,9 @@
 @extends('layout.master')
 
-<h1>detail</h1>
+@section('content')
+    <div id="root"></div>
+@endsection
+@section('js')
+    @viteReactRefresh
+    @vite(['resources/js/ArticleDetail.jsx'])
+@endsection

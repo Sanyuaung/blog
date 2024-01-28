@@ -13,7 +13,10 @@
             @foreach ($data as $d)
                 <div class="col-6  pl-0 mt-4">
                     <div class="rounded bg-card">
-                        <img class="rounded" src="{{ asset('/images/' . $d->image) }}" style="width:100%" alt="">
+                        <a href="{{ url('/article/' . $d->slug) }}">
+                            <img class="rounded" src="{{ asset('/images/' . $d->image) }}" style="width:100%"
+                                alt="">
+                        </a>
                         <div class="p-4 text-white">
                             <h4 class="text-white">{{ $d->name }}</h4>
                             <div class="d-flex justify-content-between">

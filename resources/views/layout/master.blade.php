@@ -18,6 +18,7 @@
     <!-- custom style -->
     <link rel="stylesheet" href="{{ asset('/asset/style/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    @yield('css')
 </head>
 
 <body>
@@ -140,6 +141,7 @@
             toastr.success('{{ session('success') }}')
         @endif
     </script>
+    @yield('js')
 </body>
 
 </html>

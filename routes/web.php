@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::view('/test', 'test');
 Route::get('/', 'PageController@index');
 
 //auth route
@@ -10,7 +11,7 @@ Route::post('/login', 'AuthController@Login');
 Route::get('/register', 'AuthController@showRegister');
 Route::post('/register', 'AuthController@Register');
 Route::get('/article', 'ArticleController@all');
-Route::post('/article', 'ArticleController@detail');
+Route::get('/article/{slug}', 'ArticleController@detail');
 Route::group(['middleware' => 'RedirectIfNotAuth'], function () {
     Route::get('/logout', 'AuthController@Logout');
 });

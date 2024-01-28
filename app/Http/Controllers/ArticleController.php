@@ -32,11 +32,13 @@ class ArticleController extends Controller
         if ($searchName = request()->name) {
             $data->where('name', 'like', "%$searchName%");
         }
-        $data = $data->orderBy('id','desc')->paginate(2);
+        $data = $data->orderBy('id', 'desc')->paginate(2);
         return view('article.all', compact('data'));
     }
     public function detail($slug)
     {
-        return view('article.detail');
+        $data = Article::where('slug', $slug)->with('tag', 'programming')->firstOrfail();
+        // return $data;
+        return view('article.detail', ['data' => $data]);
     }
 }
