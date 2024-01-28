@@ -9,6 +9,12 @@ class Article extends Model
 {
     use HasFactory;
     protected $fillable = ['slug', 'name', 'image', 'description', 'like_count', 'view_count'];
+    protected $appends = ['image_url'];
+
+    public function getImageUrlAttribute()
+    {
+        return asset('/images/' . $this->image);
+    }
     public function comment()
     {
         return $this->hasMany(ArticleComment::class);

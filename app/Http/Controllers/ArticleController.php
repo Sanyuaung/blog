@@ -37,8 +37,8 @@ class ArticleController extends Controller
     }
     public function detail($slug)
     {
-        $data = Article::where('slug', $slug)->with('tag', 'programming')->firstOrfail();
+        $data = Article::where('slug', $slug)->with('comment.user','tag', 'programming')->first();
         // return $data;
-        return view('article.detail', ['data' => $data]);
+        return view('article.detail', compact('data'));
     }
 }
