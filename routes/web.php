@@ -16,6 +16,11 @@ Route::group(['middleware' => 'RedirectIfNotAuth'], function () {
     Route::get('/logout', 'AuthController@Logout');
 });
 
+//API
+Route::group(['prefix' => 'api', 'namespace' => 'Api'], function () {
+    Route::post('/article-comment', 'ArticleApi@makeComment');
+});
+
 //Admin Route
 Route::get('/admin/login', 'Admin\AuthController@showLogin');
 Route::post('/admin/login', 'Admin\AuthController@Login');

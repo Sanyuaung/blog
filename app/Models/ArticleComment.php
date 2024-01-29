@@ -11,7 +11,7 @@ class ArticleComment extends Model
     protected $fillable = ['article_id', 'user_id', 'comment'];
     protected $appends = ['time_ago'];
 
-    public function getTimeAgolAttribute()
+    public function getTimeAgoAttribute()
     {
         return $this->created_at->diffForHumans();
     }
@@ -21,6 +21,6 @@ class ArticleComment extends Model
     }
     public function user()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class);
     }
 }

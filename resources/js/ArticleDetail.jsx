@@ -1,13 +1,23 @@
 import React, { useState } from "react";
-import { createRoot } from "react-dom";
+import { createRoot } from "react-dom/client";
 import BtnLoader from "./Components/BtnLoader";
+import axios from "axios";
 const data = bladeArticleDetail;
 const isAuth = bladeIsAuth;
 const App = () => {
     const [comments, setComments] = useState(data.comment);
     const [comment, setComment] = useState("");
+    const [commentLoader, setCommentLoader] = useState(false);
     const addComment = () => {
-        alert("hello");
+        setCommentLoader(true);
+        axios
+            .post("/api/article-comment", { comment, article_id: data.id })
+            .then((d) => {
+                setComments([d.data, ...comments]);
+                setComment("");
+                setCommentLoader(false);
+                alert("Comment added successfully!");
+            });
     };
     return (
         <>
@@ -45,6 +55,7 @@ const App = () => {
                     {isAuth && (
                         <>
                             <textarea
+                                value={comment}
                                 onChange={(e) => setComment(e.target.value)}
                                 name="comment"
                                 id=""
@@ -54,11 +65,12 @@ const App = () => {
                             ></textarea>
                             <div className="mt-3">
                                 <button
+                                    disabled={commentLoader}
                                     onClick={addComment}
                                     className="btn btn-primary"
                                 >
                                     Comment
-                                    <BtnLoader />
+                                    {commentLoader && <BtnLoader />}
                                 </button>
                             </div>
                         </>
