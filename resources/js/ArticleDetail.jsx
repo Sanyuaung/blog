@@ -8,7 +8,7 @@ const App = () => {
     const [comments, setComments] = useState(data.comment);
     const [comment, setComment] = useState("");
     const [commentLoader, setCommentLoader] = useState(false);
-    const [likeCount,setLikeCount]=useState(data.like_count);
+    const [likeCount, setLikeCount] = useState(data.like_count);
     const addComment = () => {
         setCommentLoader(true);
         axios
@@ -17,14 +17,25 @@ const App = () => {
                 setComments([d.data, ...comments]);
                 setComment("");
                 setCommentLoader(false);
-                alert("Comment added successfully!");
+                showSuccess("Comment Successufully");
             });
     };
     const articleLike = () => {
         axios.post("/api/article-like", { slug: data.slug }).then((d) => {
             if (d.data == "success") {
                 setLikeCount(likeCount + 1);
-                alert("Liked");
+                showSuccess("Like Successufully");
+            }
+        });
+    };
+    const saveArticle = () => {
+        axios.post("/api/article-save", { slug: data.slug }).then((d) => {
+            if (d.data == "already_save") {
+                showError("Article Already Saved");
+                return;
+            }
+            if (d.data == "success") {
+                showSuccess("Article Saved Successufully");
             }
         });
     };
@@ -60,7 +71,12 @@ const App = () => {
                     >
                         Like {likeCount}
                     </button>
-                    <button className="btn btn-sm btn-warning">Save</button>
+                    <button
+                        onClick={saveArticle}
+                        className="btn btn-sm btn-warning"
+                    >
+                        Save
+                    </button>
                 </div>
                 <div
                     className="card card-body bg-card mt-3"

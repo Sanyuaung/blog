@@ -20,6 +20,7 @@ Route::group(['middleware' => 'RedirectIfNotAuth'], function () {
 Route::group(['prefix' => 'api', 'namespace' => 'Api'], function () {
     Route::post('/article-comment', 'ArticleApi@makeComment');
     Route::post('/article-like', 'ArticleApi@Like');
+    Route::post('/article-save', 'ArticleApi@Save');
 });
 
 //Admin Route

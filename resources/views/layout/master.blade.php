@@ -15,7 +15,6 @@
         rel="stylesheet">
     <!-- boxicon -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/css/boxicons.min.css">
     <!-- custom style -->
     <link rel="stylesheet" href="{{ asset('/asset/style/style.css') }}">
@@ -137,11 +136,17 @@
         @if (session()->has('error'))
             toastr.error('{{ session('error') }}')
         @endif
-    </script>
-    <script>
+
         @if (session()->has('success'))
             toastr.success('{{ session('success') }}')
         @endif
+
+        const showSuccess = (message) => {
+            toastr.success(message);
+        }
+        const showError = (message) => {
+            toastr.error(message);
+        }
     </script>
     @yield('js')
 </body>
