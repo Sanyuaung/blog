@@ -8,6 +8,7 @@ const App = () => {
     const [comments, setComments] = useState(data.comment);
     const [comment, setComment] = useState("");
     const [commentLoader, setCommentLoader] = useState(false);
+    const [likeCount,setLikeCount]=useState(data.like_count);
     const addComment = () => {
         setCommentLoader(true);
         axios
@@ -19,6 +20,15 @@ const App = () => {
                 alert("Comment added successfully!");
             });
     };
+    const articleLike = () => {
+        axios.post("/api/article-like", { slug: data.slug }).then((d) => {
+            if (d.data == "success") {
+                setLikeCount(likeCount + 1);
+                alert("Liked");
+            }
+        });
+    };
+
     return (
         <>
             <div>
@@ -43,7 +53,13 @@ const App = () => {
                             {p.name}
                         </span>
                     ))}
-                    |<button className="btn btn-sm btn-success">Like</button>
+                    |
+                    <button
+                        onClick={articleLike}
+                        className="btn btn-sm btn-success"
+                    >
+                        Like {likeCount}
+                    </button>
                     <button className="btn btn-sm btn-warning">Save</button>
                 </div>
                 <div
