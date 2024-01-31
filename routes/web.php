@@ -14,6 +14,7 @@ Route::get('/article', 'ArticleController@all');
 Route::get('/article/{slug}', 'ArticleController@detail');
 Route::group(['middleware' => 'RedirectIfNotAuth'], function () {
     Route::get('/logout', 'AuthController@Logout');
+    Route::get('/profile','ProfileController@showProfile');
 });
 
 //API
