@@ -45,4 +45,9 @@ class ArticleApi extends Controller
         ]);
         return 'success';
     }
+    public function getSave()
+    {
+        $article = ArticleSave::where('user_id', auth()->id())->with('article')->get();
+        return response()->json($article);
+    }
 }
