@@ -8,6 +8,7 @@ export default defineConfig({
             "resources/js/app.jsx",
             "resources/js/ArticleDetail.jsx",
             "resources/js/Profile.jsx",
+            "resources/js/All.jsx",
         ]),
         react(),
     ],
