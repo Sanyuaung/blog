@@ -66,7 +66,9 @@
                         @foreach ($trending_article as $ta)
                             <div class="col-6">
                                 <div class="bg-dark rounded">
-                                    <img src="{{ $ta->image_url }}" class="w-100 rounded">
+                                    <a href="{{ route('article.detail', ['slug' => $ta->slug]) }}" class="text-white">
+                                        <img src="{{ $ta->image_url }}" class="w-100 rounded">
+                                    </a>
                                     <p class="text-white text-center p-2">{{ $ta->name }}</p>
                                 </div>
                             </div>
@@ -80,7 +82,9 @@
                         @foreach ($love_article as $la)
                             <div class="col-6">
                                 <div class="bg-dark rounded">
-                                    <img src="{{ $la->image_url }}" class="w-100 rounded">
+                                    <a href="{{ route('article.detail', ['slug' => $la->slug]) }}" class="text-white">
+                                        <img src="{{ $la->image_url }}" class="w-100 rounded">
+                                    </a>
                                     <p class="text-white text-center p-2">{{ $la->name }}</p>
                                 </div>
                             </div>

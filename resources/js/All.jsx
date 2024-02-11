@@ -54,19 +54,29 @@ const App = () => {
                                 <div className="p-4 text-white">
                                     <h4 className="text-white">{d.name}</h4>
                                     <div className="d-flex justify-content-between">
-                                        <button className="btn btn-dark">
+                                        <button
+                                            className="btn btn-dark"
+                                            style={{ pointerEvents: "none" }}
+                                        >
                                             <span className="text-success">
                                                 <i className="bx bx-happy-heart-eyes" />
                                             </span>{" "}
                                             : {d.view_count}
                                         </button>
-                                        <button className="btn btn-dark">
+                                        <button
+                                            className="btn btn-dark"
+                                            style={{ pointerEvents: "none" }}
+                                        >
                                             <span className="text-success">
                                                 <i className="bx bx-heart" />
                                             </span>{" "}
                                             : {d.like_count}
                                         </button>
-                                        <button className="btn btn-dark">
+
+                                        <button
+                                            className="btn btn-dark"
+                                            style={{ pointerEvents: "none" }}
+                                        >
                                             <span className="text-success">
                                                 <i className="bx bx-message-square-dots" />
                                             </span>{" "}

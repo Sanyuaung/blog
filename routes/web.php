@@ -11,10 +11,10 @@ Route::post('/login', 'AuthController@Login');
 Route::get('/register', 'AuthController@showRegister');
 Route::post('/register', 'AuthController@Register');
 Route::get('/article', 'ArticleController@all');
-Route::get('/article/{slug}', 'ArticleController@detail');
+Route::get('/article/{slug}', 'ArticleController@detail')->name('article.detail');;
 Route::group(['middleware' => 'RedirectIfNotAuth'], function () {
     Route::get('/logout', 'AuthController@Logout');
-    Route::get('/profile','ProfileController@showProfile');
+    Route::get('/profile', 'ProfileController@showProfile');
 });
 
 //API
@@ -23,6 +23,8 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api'], function () {
     Route::post('/article-like', 'ArticleApi@Like');
     Route::post('/article-save', 'ArticleApi@Save');
     Route::get('/article-save', 'ArticleApi@getSave');
+    Route::get('/user-info', 'AuthApi@getProfile');
+    Route::post('/user-update', 'AuthApi@updateProfile');
 });
 
 //Admin Route

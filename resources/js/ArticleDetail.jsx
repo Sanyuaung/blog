@@ -66,14 +66,19 @@ const App = () => {
                     ))}
                     |
                     <button
-                        onClick={articleLike}
-                        className="btn btn-sm btn-success"
+                        onClick={isAuth ? articleLike : null}
+                        className={`btn btn-sm btn-success${
+                            isAuth ? "" : " disabled"
+                        }`}
+                        disabled={!isAuth}
                     >
                         Like {likeCount}
                     </button>
                     <button
-                        onClick={saveArticle}
-                        className="btn btn-sm btn-warning"
+                        onClick={isAuth ? saveArticle : null}
+                        className={`btn btn-sm btn-warning${
+                            isAuth ? "" : " disabled"
+                        }`}
                     >
                         Save
                     </button>
